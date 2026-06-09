@@ -29,6 +29,20 @@ Aplikasi catatan modern dengan fitur CRUD lengkap, pencarian, pengaturan, dan mo
 
 ### Screenshot Preview
 
+* Home/Notes List
+
+* Add Note
+
+* Edit Note
+
+* Note Detail
+
+* Favorites
+
+* Settings
+
+* Profile
+
 
 
 ## Video Demo
