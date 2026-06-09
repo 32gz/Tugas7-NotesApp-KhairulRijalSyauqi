@@ -31,17 +31,31 @@ Aplikasi catatan modern dengan fitur CRUD lengkap, pencarian, pengaturan, dan mo
 
 * Home/Notes List
 
+![gambar](https://github.com/32gz/Tugas7-NotesApp-KhairulRijalSyauqi/blob/main/Screenshot%202026-06-09%20141257.png)
+
 * Add Note
+
+![gambar](https://github.com/32gz/Tugas7-NotesApp-KhairulRijalSyauqi/blob/main/Screenshot%202026-06-09%20141355.png)
 
 * Edit Note
 
+![gambar](https://github.com/32gz/Tugas7-NotesApp-KhairulRijalSyauqi/blob/main/Screenshot%202026-06-09%20142639.png)
+
 * Note Detail
+
+![gambar](https://github.com/32gz/Tugas7-NotesApp-KhairulRijalSyauqi/blob/main/Screenshot%202026-06-09%20141423.png)
 
 * Favorites
 
+![gambar](https://github.com/32gz/Tugas7-NotesApp-KhairulRijalSyauqi/blob/main/Screenshot%202026-06-09%20142705.png)
+
 * Settings
 
+![gambar](https://github.com/32gz/Tugas7-NotesApp-KhairulRijalSyauqi/blob/main/Screenshot%202026-06-09%20141507.png)
+
 * Profile
+
+![gambar](https://github.com/32gz/Tugas7-NotesApp-KhairulRijalSyauqi/blob/main/Screenshot%202026-06-09%20142829.png)
 
 
 
