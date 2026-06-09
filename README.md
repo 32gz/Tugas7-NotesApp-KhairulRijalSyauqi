@@ -67,7 +67,7 @@ Video demo (~45 detik) yang menunjukkan:
 - Settings dan Dark Mode toggle
 - Offline mode demonstration
 
-**[Watch Demo Video](assets/demo/notes-app-demo.mp4)**
+**[Watch Demo Video](https://github.com/user-attachments/assets/4efcdb90-afcc-4cd6-b8fc-5a6f044099c5)**
 
 ## Database Schema
 
