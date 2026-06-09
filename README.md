@@ -1,5 +1,5 @@
-# * Nama : Khairul Rijal Syauqi
-# * NIM  : 123140143
+* Nama : Khairul Rijal Syauqi
+* NIM  : 123140143
 
 Aplikasi catatan modern dengan fitur CRUD lengkap, pencarian, pengaturan, dan mode offline. Dibangun menggunakan Kotlin Multiplatform dengan Jetpack Compose untuk UI dan SQLDelight untuk database lokal.
 
