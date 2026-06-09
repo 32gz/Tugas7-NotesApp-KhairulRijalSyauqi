@@ -1,35 +1,245 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# Notes App - Kotlin Multiplatform Mobile Development
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-blue)
+![Language](https://img.shields.io/badge/Language-Kotlin-blue)
+![UI Framework](https://img.shields.io/badge/UI-Compose%20Multiplatform-blue)
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+Aplikasi catatan modern dengan fitur CRUD lengkap, pencarian, pengaturan, dan mode offline. Dibangun menggunakan Kotlin Multiplatform dengan Jetpack Compose untuk UI dan SQLDelight untuk database lokal.
 
-### Build and Run Android Application
+## ✨ Fitur Utama
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+| Fitur | Deskripsi |
+|-------|-----------|
+| **CRUD Notes** | Create, Read, Update, Delete catatan |
+| **Search** | Pencarian catatan berdasarkan judul dan konten |
+| **Favorites** | Tandai catatan sebagai favorit |
+| **Dark Mode** | Toggle tema gelap/terang |
+| **Sort Order** | Urutkan catatan (Terbaru, Terlama, A-Z, Terakhir Diubah) |
+| **Offline Mode** | Semua data tersimpan lokal dengan SQLDelight |
+| **DataStore** | Pengaturan pengguna persistensi dengan Preferences DataStore |
 
-### Build and Run iOS Application
+## 📱 Screenshots
 
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+### Main Screens
 
----
+| Screen | Description |
+|--------|-------------|
+| **Home/Notes List** | Menampilkan semua catatan dengan search bar |
+| **Add Note** | Form untuk membuat catatan baru |
+| **Edit Note** | Form untuk mengedit catatan yang ada |
+| **Note Detail** | Detail lengkap catatan |
+| **Favorites** | Daftar catatan favorit |
+| **Settings** | Pengaturan aplikasi |
+| **Profile** | Profil pengguna |
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+### Screenshot Preview
+
+```
+┌─────────────────────────────────────────┐
+│           Notes List Screen             │
+│  ┌─────────────────────────────────────┐│
+│  │ 🔍 Search notes...                  ││
+│  └─────────────────────────────────────┘│
+│                                         │
+│  ┌─────────────────────────────────────┐│
+│  │ 📝 Catatan 1              ★  🗑️   ││
+│  │    Preview content...              ││
+│  │    9 Jun 2026                       ││
+│  └─────────────────────────────────────┘│
+│                                         │
+│  ┌─────────────────────────────────────┐│
+│  │ 📝 Catatan 2              ☆  🗑️   ││
+│  │    Preview content...              ││
+│  │    8 Jun 2026                       ││
+│  └─────────────────────────────────────┘│
+│                              ⚙️          │
+└─────────────────────────────────────────┘
+```
+
+> **Note**: Screenshot screenshoot dapat ditemukan di folder [assets/screenshots/](assets/screenshots/)
+
+## 🎬 Video Demo
+
+Video demo (~45 detik) yang menunjukkan:
+- ✅ CRUD Operations (Create, Read, Update, Delete)
+- ✅ Search functionality
+- ✅ Settings dan Dark Mode toggle
+- ✅ Offline mode demonstration
+
+**[Watch Demo Video](assets/demo/notes-app-demo.mp4)**
+
+## 🗄️ Database Schema
+
+### SQLDelight Database: `notes.db`
+
+```sql
+-- Notes Table
+CREATE TABLE notes (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    is_favorite INTEGER NOT NULL DEFAULT 0,
+    created_at INTEGER NOT NULL,
+    updated_at INTEGER NOT NULL
+);
+
+-- Indexes for optimized queries
+CREATE INDEX notes_favorite_idx ON notes(is_favorite);
+CREATE INDEX notes_created_idx ON notes(created_at DESC);
+CREATE INDEX notes_updated_idx ON notes(updated_at DESC);
+
+-- Queries for different sort orders
+getAllNotesNewest:
+SELECT * FROM notes ORDER BY created_at DESC;
+
+getAllNotesOldest:
+SELECT * FROM notes ORDER BY created_at ASC;
+
+getAllNotesAlphabetical:
+SELECT * FROM notes ORDER BY title ASC;
+
+getAllNotesLastModified:
+SELECT * FROM notes ORDER BY updated_at DESC;
+
+getFavoriteNotes:
+SELECT * FROM notes WHERE is_favorite = 1 ORDER BY created_at DESC;
+
+searchNotesNewest:
+SELECT * FROM notes WHERE title LIKE :query OR content LIKE :query ORDER BY created_at DESC;
+
+searchNotesOldest:
+SELECT * FROM notes WHERE title LIKE :query OR content LIKE :query ORDER BY created_at ASC;
+
+searchNotesAlphabetical:
+SELECT * FROM notes WHERE title LIKE :query OR content LIKE :query ORDER BY title ASC;
+
+searchNotesLastModified:
+SELECT * FROM notes WHERE title LIKE :query OR content LIKE :query ORDER BY updated_at DESC;
+
+getNoteById:
+SELECT * FROM notes WHERE id = :id;
+
+insertNote:
+INSERT INTO notes (title, content, is_favorite, created_at, updated_at)
+VALUES (:title, :content, :isFavorite, :createdAt, :updatedAt);
+
+updateNote:
+UPDATE notes SET title = :title, content = :content, updated_at = :updatedAt WHERE id = :id;
+
+updateFavorite:
+UPDATE notes SET is_favorite = :isFavorite, updated_at = :updatedAt WHERE id = :id;
+
+deleteNote:
+DELETE FROM notes WHERE id = :id;
+```
+
+### Entity Model
+
+```kotlin
+data class Note(
+    val id: Long = 0,
+    val title: String = "",
+    val content: String = "",
+    val isFavorite: Boolean = false,
+    val createdAt: Long = System.currentTimeMillis(),
+    val updatedAt: Long = System.currentTimeMillis()
+)
+```
+
+### User Settings (DataStore)
+
+```kotlin
+data class UserSettings(
+    val isDarkTheme: Boolean = false,
+    val sortOrder: SortOrder = SortOrder.NEWEST_FIRST
+)
+
+enum class SortOrder {
+    NEWEST_FIRST,    // Urutkan dari terbaru
+    OLDEST_FIRST,    // Urutkan dari terlama
+    ALPHABETICAL,    // Urutkan A-Z
+    LAST_MODIFIED   // Urutkan berdasarkan perubahan terakhir
+}
+```
+
+## 📁 Project Structure
+
+```
+Tugas7KhairulRijalSyauqi3/
+├── composeApp/
+│   ├── src/
+│   │   ├── androidMain/
+│   │   │   └── kotlin/
+│   │   │       └── com/example/tugas7khairulrijalsyauqi/
+│   │   │           ├── database/
+│   │   │           │   └── DatabaseDriverFactory.kt
+│   │   │           ├── MainActivity.kt
+│   │   │           └── Platform.android.kt
+│   │   ├── commonMain/
+│   │   │   └── kotlin/
+│   │   │       └── com/example/tugas7khairulrijalsyauqi/
+│   │   │           ├── App.kt                    # Main App Composable
+│   │   │           ├── model/
+│   │   │           │   └── Note.kt              # Data models
+│   │   │           ├── repository/
+│   │   │           │   └── NotesRepository.kt   # Database operations
+│   │   │           ├── datastore/
+│   │   │           │   └── SettingsDataStore.kt # Preferences storage
+│   │   │           ├── screens/
+│   │   │           │   ├── NotesListScreen.kt
+│   │   │           │   ├── AddNoteScreen.kt
+│   │   │           │   ├── EditNoteScreen.kt
+│   │   │           │   ├── NoteDetailScreen.kt
+│   │   │           │   ├── FavoritesScreen.kt
+│   │   │           │   ├── SettingsScreen.kt
+│   │   │           │   └── ProfileScreen.kt
+│   │   │           ├── navigation/
+│   │   │           │   ├── DrawerNavigation.kt
+│   │   │           │   └── NotesNavHost.kt
+│   │   │           ├── viewmodel/
+│   │   │           │   ├── NotesViewModel.kt
+│   │   │           │   ├── NoteDetailViewModel.kt
+│   │   │           │   ├── NoteEditorViewModel.kt
+│   │   │           │   ├── SettingsViewModel.kt
+│   │   │           │   └── ProfileViewModel.kt
+│   │   │           └── ui/
+│   │   │               ├── components/
+│   │   │               │   ├── NoteCard.kt
+│   │   │               │   ├── SearchBar.kt
+│   │   │               │   └── UiStates.kt
+│   │   │               └── theme/
+│   │   │                   └── Theme.kt
+│   │   └── iosMain/
+│   └── build.gradle.kts
+├── shared/
+│   └── src/
+│       └── commonMain/
+│           └── kotlin/
+│               └── shared/
+│                   └── Greeting.kt
+└── iosApp/
+```
+
+## 🔧 Teknologi yang Digunakan
+
+| Teknologi | Deskripsi |
+|-----------|-----------|
+| **Kotlin Multiplatform** | Kode bersama untuk Android & iOS |
+| **Jetpack Compose** | UI toolkit untuk Native look |
+| **SQLDelight** | Database dengan type-safe SQL |
+| **DataStore** | Preferences storage |
+| **Kotlin Coroutines & Flow** | Async operations & reactive streams |
+| **Material 3** | Design system |
+
+## 🚀 Cara Menjalankan
+
+### Android
+
+```bash
+# Build debug APK
+./gradlew :composeApp:assembleDebug
+
+# Install ke emulator/device
+./gradlew :composeApp:installDebug
+```
+
