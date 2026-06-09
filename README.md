@@ -1,12 +1,8 @@
-# Notes App - Kotlin Multiplatform Mobile Development
 
-![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-blue)
-![Language](https://img.shields.io/badge/Language-Kotlin-blue)
-![UI Framework](https://img.shields.io/badge/UI-Compose%20Multiplatform-blue)
 
 Aplikasi catatan modern dengan fitur CRUD lengkap, pencarian, pengaturan, dan mode offline. Dibangun menggunakan Kotlin Multiplatform dengan Jetpack Compose untuk UI dan SQLDelight untuk database lokal.
 
-## ✨ Fitur Utama
+## Fitur Utama
 
 | Fitur | Deskripsi |
 |-------|-----------|
@@ -18,9 +14,7 @@ Aplikasi catatan modern dengan fitur CRUD lengkap, pencarian, pengaturan, dan mo
 | **Offline Mode** | Semua data tersimpan lokal dengan SQLDelight |
 | **DataStore** | Pengaturan pengguna persistensi dengan Preferences DataStore |
 
-## 📱 Screenshots
-
-### Main Screens
+## Screenshots
 
 | Screen | Description |
 |--------|-------------|
@@ -34,41 +28,19 @@ Aplikasi catatan modern dengan fitur CRUD lengkap, pencarian, pengaturan, dan mo
 
 ### Screenshot Preview
 
-```
-┌─────────────────────────────────────────┐
-│           Notes List Screen             │
-│  ┌─────────────────────────────────────┐│
-│  │ 🔍 Search notes...                  ││
-│  └─────────────────────────────────────┘│
-│                                         │
-│  ┌─────────────────────────────────────┐│
-│  │ 📝 Catatan 1              ★  🗑️   ││
-│  │    Preview content...              ││
-│  │    9 Jun 2026                       ││
-│  └─────────────────────────────────────┘│
-│                                         │
-│  ┌─────────────────────────────────────┐│
-│  │ 📝 Catatan 2              ☆  🗑️   ││
-│  │    Preview content...              ││
-│  │    8 Jun 2026                       ││
-│  └─────────────────────────────────────┘│
-│                              ⚙️          │
-└─────────────────────────────────────────┘
-```
 
-> **Note**: Screenshot screenshoot dapat ditemukan di folder [assets/screenshots/](assets/screenshots/)
 
-## 🎬 Video Demo
+## Video Demo
 
 Video demo (~45 detik) yang menunjukkan:
-- ✅ CRUD Operations (Create, Read, Update, Delete)
-- ✅ Search functionality
-- ✅ Settings dan Dark Mode toggle
-- ✅ Offline mode demonstration
+- CRUD Operations (Create, Read, Update, Delete)
+- Search functionality
+- Settings dan Dark Mode toggle
+- Offline mode demonstration
 
 **[Watch Demo Video](assets/demo/notes-app-demo.mp4)**
 
-## 🗄️ Database Schema
+## Database Schema
 
 ### SQLDelight Database: `notes.db`
 
@@ -220,7 +192,7 @@ Tugas7KhairulRijalSyauqi3/
 └── iosApp/
 ```
 
-## 🔧 Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 | Teknologi | Deskripsi |
 |-----------|-----------|
@@ -231,7 +203,7 @@ Tugas7KhairulRijalSyauqi3/
 | **Kotlin Coroutines & Flow** | Async operations & reactive streams |
 | **Material 3** | Design system |
 
-## 🚀 Cara Menjalankan
+## Cara Menjalankan
 
 ### Android
 
