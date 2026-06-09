@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=Tugas7KhairulRijalSyauqi
+PRODUCT_BUNDLE_IDENTIFIER=com.example.tugas7khairulrijalsyauqi.Tugas7KhairulRijalSyauqi$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
